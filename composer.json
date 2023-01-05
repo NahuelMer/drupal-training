@@ -33,6 +33,7 @@
         "drupal/slick_views": "^2.6",
         "drupal/stable": "^2.0",
         "drupal/taxonomy_menu_ui": "^3.0",
+        "drupal/thex": "^9.2",
         "drush/drush": "^11.4"
     },
     "conflict": {
