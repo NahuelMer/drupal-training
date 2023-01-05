@@ -1,0 +1,10 @@
+name: Review API
+type: module
+core_version_requirement: ^10
+description: This module implements an API for reviews import.
+package: Review API
+
+# dependencies: 
+#   - drupal:block
+
+configure: reviewapi.admin_settings

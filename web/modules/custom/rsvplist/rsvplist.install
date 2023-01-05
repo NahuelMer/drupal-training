@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the rsvplist module
+ */
+
+//  function rsvplist_schema() {
+//     // Create a database table called 'rsvplist'
+//     $schema['rsvplist'] = [
+//         'description' => 'Stores email, timestamp nid and uid for an RSVP',
+//         'fields' => [
+//             'id' => [
+//                 'description' => 'The primary identifier for the record.',
+//                 'type' => 'serial',
+//                 'size' => 'small',
+//                 'unsigned' => TRUE,
+//                 'not null' => TRUE,
+//             ],
+            
+//         ],
+//     ];
+//  }
