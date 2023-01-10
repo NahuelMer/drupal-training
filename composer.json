@@ -17,6 +17,7 @@
     "require": {
         "composer/installers": "^2.0",
         "drupal/admin_toolbar": "^3.3",
+        "drupal/asset_injector": "^2.16",
         "drupal/backup_migrate": "^5.0",
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-project-message": "^10.0",
@@ -25,6 +26,8 @@
         "drupal/feeds": "^3.0@beta",
         "drupal/feeds_tamper": "^2.0@beta",
         "drupal/gin": "^3.0@RC",
+        "drupal/layout_builder_styles": "^2.0",
+        "drupal/layout_paragraphs": "^2.0",
         "drupal/libraries": "^4.0",
         "drupal/paragraphs": "^1.15",
         "drupal/pathauto": "^1.11",
@@ -34,6 +37,8 @@
         "drupal/stable": "^2.0",
         "drupal/taxonomy_menu_ui": "^3.0",
         "drupal/thex": "^9.2",
+        "drupal/zircon": "10.1.x-dev@dev",
+        "drupal/zuvi": "^10.1",
         "drush/drush": "^11.4"
     },
     "conflict": {
@@ -84,7 +89,7 @@
             ],
             "web/themes/custom/{$name}": [
                 "type:drupal-custom-theme"
-            ]
+            ] 
         },
         "drupal-core-project-message": {
             "include-keys": [

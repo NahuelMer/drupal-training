@@ -22,15 +22,6 @@ function reviewapi_node_presave(NodeInterface $node){
 
             $url = "https://store.steampowered.com/appreviews/". $gameID[0]['value'] . "?" . $query;
 
-            // $ch = curl_init();
-            // // IMPORTANT: the below line is a security risk, read https://paragonie.com/blog/2017/10/certainty-automated-cacert-pem-management-for-php-software
-            // // in most cases, you should set it to true
-            // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            // curl_setopt($ch, CURLOPT_URL, $url);
-            // $result = curl_exec($ch);
-            // curl_close($ch);
-
             $result = file_get_contents($url);
 
             $data = json_decode($result, TRUE);
@@ -45,15 +36,15 @@ function reviewapi_node_presave(NodeInterface $node){
                     'entity_type' => 'node',            // required.
                     'entity_id'   => $node->id(),                // required.
                     'field_name'  => 'comment',         // required.
-                 
+                
                     // The user id of the comment's 'author'. Use 0 for the anonymous user.
                     'uid' => 0,                         // required.
-                 
+                
                     // These values are for the comment itself.
                     'comment_type' => 'comment',        // required.
                     'subject' => strval($review['author']['steamid']),  // required.
                     'comment_body' => $review['review'],      // optional.
-                 
+                
                     // Whether the comment is 'approved' or not.
                     'status' => 1,                      // optional. Defaults to 0.
                 ];
@@ -78,16 +69,6 @@ function reviewapi_node_presave(NodeInterface $node){
 
         }
        
-    }    
-    
-    // foreach ($game as $game_data) {
-    //   print "<h3>".$game_data['description']."</h3>";
-    // }
-
-    // $data = file_get_contents('https://www.giantbomb.com/api/review/1900-25/?api_key=c3bb58608e8cc8ec1727dbfbddf03d7fa54d1db3');
-    // $game = json_decode($data, TRUE);
-    // $game_review['description'] = t("<h3>".$game['description']."</h3>");
-
-    // return $game_review;
+    } 
 
 }

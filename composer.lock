@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "476bdb2e6d67e610040da89deebceeda",
+    "content-hash": "215cfb2c96b0bc50a12b25113beb9f84",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1456,6 +1456,55 @@
             }
         },
         {
+            "name": "drupal/asset_injector",
+            "version": "2.16.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/asset_injector.git",
+                "reference": "8.x-2.16"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/asset_injector-8.x-2.16.zip",
+                "reference": "8.x-2.16",
+                "shasum": "34965a20c346c2fbcf14b690166b070070837a13"
+            },
+            "require": {
+                "drupal/core": "^9.3 || ^10.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.16",
+                    "datestamp": "1672243573",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Decker",
+                    "homepage": "https://www.drupal.org/u/pookmish"
+                },
+                {
+                    "name": "Axel Rutz",
+                    "homepage": "https://www.drupal.org/u/axelrutz"
+                }
+            ],
+            "description": "Adds CSS or JS to the page output based on configurable rules.",
+            "homepage": "http://drupal.org/project/asset_injector",
+            "support": {
+                "source": "https://git.drupalcode.org/project/asset_injector",
+                "issues": "https://www.drupal.org/project/issues/asset_injector"
+            }
+        },
+        {
             "name": "drupal/backup_migrate",
             "version": "5.0.3",
             "source": {
@@ -2447,6 +2496,128 @@
             ]
         },
         {
+            "name": "drupal/layout_builder_styles",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_builder_styles.git",
+                "reference": "2.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/layout_builder_styles-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "e41a6ca8c4322c0dde3392c682dde02beef9759c"
+            },
+            "require": {
+                "drupal/core": "^8.7.7 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0",
+                    "datestamp": "1662383467",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "bkosborne",
+                    "homepage": "https://www.drupal.org/user/788032"
+                },
+                {
+                    "name": "gravelpot",
+                    "homepage": "https://www.drupal.org/user/748208"
+                },
+                {
+                    "name": "Jeff Cardwell",
+                    "homepage": "https://www.drupal.org/user/2913129"
+                },
+                {
+                    "name": "mark_fullmer",
+                    "homepage": "https://www.drupal.org/user/2612816"
+                },
+                {
+                    "name": "phenaproxima",
+                    "homepage": "https://www.drupal.org/user/205645"
+                },
+                {
+                    "name": "twfahey",
+                    "homepage": "https://www.drupal.org/user/3403722"
+                }
+            ],
+            "description": "Apply styles to blocks in Layout Builder.",
+            "homepage": "https://www.drupal.org/project/layout_builder_styles",
+            "support": {
+                "source": "https://git.drupalcode.org/project/layout_builder_styles"
+            }
+        },
+        {
+            "name": "drupal/layout_paragraphs",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/layout_paragraphs.git",
+                "reference": "2.0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/layout_paragraphs-2.0.2.zip",
+                "reference": "2.0.2",
+                "shasum": "5157a05120d81f0978093ddbdf92c3ead2e11010"
+            },
+            "require": {
+                "drupal/core": "^9.1 || ^10",
+                "drupal/paragraphs": "^1.6"
+            },
+            "require-dev": {
+                "drupal/block_field": "~1.0",
+                "drupal/entity_usage": "2.x-dev",
+                "drupal/paragraphs-paragraphs_library": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.2",
+                    "datestamp": "1671393681",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "itamair",
+                    "homepage": "https://www.drupal.org/user/1179076"
+                },
+                {
+                    "name": "justin2pin",
+                    "homepage": "https://www.drupal.org/user/278450"
+                }
+            ],
+            "description": "Layout Paragraphs",
+            "homepage": "https://www.drupal.org/project/layout_paragraphs",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/layout_paragraphs",
+                "issues": "https://www.drupal.org/project/issues/layout_paragraphs"
+            }
+        },
+        {
             "name": "drupal/libraries",
             "version": "4.0.0",
             "source": {
@@ -3099,6 +3270,115 @@
             "homepage": "https://www.drupal.org/project/token",
             "support": {
                 "source": "https://git.drupalcode.org/project/token"
+            }
+        },
+        {
+            "name": "drupal/zircon",
+            "version": "dev-10.1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/zircon.git",
+                "reference": "0d5bf0b98765f08329c4d520715339fee5a619ab"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10"
+            },
+            "type": "drupal-theme",
+            "extra": {
+                "branch-alias": {
+                    "dev-10.1.x": "10.1.x-dev"
+                },
+                "drupal": {
+                    "version": "10.1.x-dev",
+                    "datestamp": "1673343944",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "buivankim2020",
+                    "homepage": "https://www.drupal.org/user/2959439"
+                },
+                {
+                    "name": "Gauravvv",
+                    "homepage": "https://www.drupal.org/user/3643629"
+                },
+                {
+                    "name": "Hai Nguyen",
+                    "homepage": "https://www.drupal.org/user/1229130"
+                },
+                {
+                    "name": "MegaChriz",
+                    "homepage": "https://www.drupal.org/user/654114"
+                },
+                {
+                    "name": "mpp",
+                    "homepage": "https://www.drupal.org/user/359881"
+                },
+                {
+                    "name": "tgoeg",
+                    "homepage": "https://www.drupal.org/user/3531072"
+                },
+                {
+                    "name": "WeebPal",
+                    "homepage": "https://www.drupal.org/user/1861072"
+                }
+            ],
+            "description": "A flexible, recolorable theme with many regions and a responsive, mobile-first layout with Drupal 9 support.",
+            "homepage": "https://www.drupal.org/project/zircon",
+            "support": {
+                "source": "https://git.drupalcode.org/project/zircon"
+            }
+        },
+        {
+            "name": "drupal/zuvi",
+            "version": "10.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/zuvi.git",
+                "reference": "10.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/zuvi-10.1.0.zip",
+                "reference": "10.1.0",
+                "shasum": "87b6f6555493f177cc6f11721d8fe663a08aaaf5"
+            },
+            "require": {
+                "drupal/core": "^9.4 || ^10"
+            },
+            "type": "drupal-theme",
+            "extra": {
+                "drupal": {
+                    "version": "10.1.0",
+                    "datestamp": "1671636113",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "ravis",
+                    "homepage": "https://www.drupal.org/user/79351"
+                }
+            ],
+            "description": "A light weight, flexible, fully responsive and multi-purpose Drupal 8, 9, 10 theme by <a href=\"https://www.drupar.com\" target=\"_blank\">Drupar.com</a><br /><a href=\"https://www.drupar.com/theme/zuvi\" target=\"_blank\">Theme Page</a> | <a href=\"https://www.drupar.com/zuvi-documentation\" target=\"_blank\">Theme Documentation</a> | <a href=\"https://www.drupar.com/theme/zuvipro\" target=\"_blank\">Zuvi Pro</a>",
+            "homepage": "https://www.drupal.org/project/zuvi",
+            "support": {
+                "source": "https://git.drupalcode.org/project/zuvi"
             }
         },
         {
@@ -7817,7 +8097,8 @@
     "stability-flags": {
         "drupal/feeds": 10,
         "drupal/feeds_tamper": 10,
-        "drupal/gin": 5
+        "drupal/gin": 5,
+        "drupal/zircon": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
