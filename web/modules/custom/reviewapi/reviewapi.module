@@ -5,6 +5,7 @@ use Drupal\comment\Entity\Comment;
 
 ini_set("allow_url_fopen", 1);
 
+// TODO: Documentar todo esto, identar esto
 // use insert here
 function reviewapi_node_presave(NodeInterface $node){
 
@@ -18,6 +19,22 @@ function reviewapi_node_presave(NodeInterface $node){
 
         if ( $gameID != [] ) {
 
+            $subject = [];
+
+            $entity_manager = \Drupal::entityTypeManager();
+
+            /** @var \Drupal\comment\CommentStorageInterface $storage */
+            $storage = $entity_manager->getStorage('comment');
+            /** @var \Drupal\comment\CommentFieldItemList $commentField */
+            $commentField = $node->get('comment');
+            $comments = $storage->loadThread($node, $commentField->getFieldDefinition()->getName(), \Drupal\comment\CommentManagerInterface::COMMENT_MODE_FLAT);
+
+            /** @var \Drupal\comment\Entity\Comment $comment */
+            foreach ($comments as $comment) {
+
+                array_push($subject, $comment->get('subject')->value);
+            }
+
             $query = http_build_query(array('json'=>'1'));
 
             $url = "https://store.steampowered.com/appreviews/". $gameID[0]['value'] . "?" . $query;
@@ -29,6 +46,8 @@ function reviewapi_node_presave(NodeInterface $node){
             // Creating the comment
 
             foreach($data['reviews'] as $review) {
+
+                if( !in_array($review['author']['steamid'], $subject) ){
 
                 $values = [
  
@@ -47,6 +66,7 @@ function reviewapi_node_presave(NodeInterface $node){
                 
                     // Whether the comment is 'approved' or not.
                     'status' => 1,                      // optional. Defaults to 0.
+                    
                 ];
                 
                 // This will create an actual comment entity out of our field values.
@@ -54,6 +74,8 @@ function reviewapi_node_presave(NodeInterface $node){
                 
                 // Last, we actually need to save the comment to the database.
                 $comment->save();
+
+                }
                 
             } 
             
