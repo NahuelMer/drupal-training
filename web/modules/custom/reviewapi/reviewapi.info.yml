@@ -1,7 +1,7 @@
 name: Review API
 type: module
 core_version_requirement: ^10
-description: This module implements an API for reviews import.
+description: This module implements an API to import reviews from Steam.
 package: Review API
 
 # dependencies: 

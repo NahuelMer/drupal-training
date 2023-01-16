@@ -5,92 +5,101 @@ use Drupal\comment\Entity\Comment;
 
 ini_set("allow_url_fopen", 1);
 
-// TODO: Documentar todo esto, identar esto
-// use insert here
-function reviewapi_node_presave(NodeInterface $node){
+function reviewapi_node_update(NodeInterface $node){
 
-    if ( is_null($node) ){
-        \Drupal::messenger()->addMessage("Node not found...");
+  // Checks if the node is found
+  if ( is_null($node) ) {
+
+    \Drupal::messenger()->addMessage( "Node not found..." );
+    return false;
+  }
+
+  // Checks if the current node is a Review (news) and if is published
+  if (!($node->getType() == 'news' and $node->isPublished())) {
+
+    return false;
+  }
+
+  $gameID = $node->get('field_gameid')->getValue();
+
+  // Checks if the Review has a GameID or not
+  if ( !$gameID ) {
+
+    // dpm(get_defined_vars());
+
+    \Drupal::messenger()->addMessage(t('ReviewAPI found no reviews for this game...'));
+    return false;
+
+  } else {
+
+    $subject = [];
+
+    $entity_manager = \Drupal::entityTypeManager();
+
+    // Search the comments of the current node
+
+    /** @var \Drupal\comment\CommentStorageInterface $storage */
+    $storage = $entity_manager->getStorage('comment');
+    /** @var \Drupal\comment\CommentFieldItemList $commentField */
+    $commentField = $node->get('comment');
+    $comments = $storage->loadThread($node, $commentField->getFieldDefinition()->getName(), \Drupal\comment\CommentManagerInterface::COMMENT_MODE_FLAT);
+
+    /** @var \Drupal\comment\Entity\Comment $comment */
+    foreach ($comments as $comment) {
+
+      array_push($subject, $comment->get('subject')->value);
     }
 
-    if ($node->getType() == 'news' and $node->isPublished()) {
+    // Builds the query for the SteamDB
 
-        $gameID = $node->get('field_gameid')->getValue();
+    $query = http_build_query(array('json'=>'1'));
 
-        if ( $gameID != [] ) {
+    $url = "https://store.steampowered.com/appreviews/". $gameID[0]['value'] . "?" . $query;
 
-            $subject = [];
+    $result = file_get_contents($url);
 
-            $entity_manager = \Drupal::entityTypeManager();
+    $data = json_decode($result, TRUE);
 
-            /** @var \Drupal\comment\CommentStorageInterface $storage */
-            $storage = $entity_manager->getStorage('comment');
-            /** @var \Drupal\comment\CommentFieldItemList $commentField */
-            $commentField = $node->get('comment');
-            $comments = $storage->loadThread($node, $commentField->getFieldDefinition()->getName(), \Drupal\comment\CommentManagerInterface::COMMENT_MODE_FLAT);
+    // Creating the comments
 
-            /** @var \Drupal\comment\Entity\Comment $comment */
-            foreach ($comments as $comment) {
+    foreach($data['reviews'] as $review) {
 
-                array_push($subject, $comment->get('subject')->value);
-            }
+      if( !in_array($review['author']['steamid'], $subject) ){
 
-            $query = http_build_query(array('json'=>'1'));
+      $values = [
 
-            $url = "https://store.steampowered.com/appreviews/". $gameID[0]['value'] . "?" . $query;
+      // These values are for the entity that you're creating the comment for, not the comment itself.
+      'entity_type' => 'node',            // required.
+      'entity_id'   => $node->id(),       // required.
+      'field_name'  => 'comment',         // required.
 
-            $result = file_get_contents($url);
+      // The user id of the comment's 'author'. Use 0 for the anonymous user.
+      'uid' => 0,                         // required.
 
-            $data = json_decode($result, TRUE);
+      // These values are for the comment itself.
+      'comment_type' => 'comment',        // required.
+      'subject' => strval($review['author']['steamid']),  // required.
+      'comment_body' => $review['review'],      // optional.
 
-            // Creating the comment
+      // Whether the comment is 'approved' or not.
+      'status' => 1,                      // optional. Defaults to 0.
+      
+      ];
+  
+      // This will create an actual comment entity out of our field values.
+      $comment = Comment::create($values);
+  
+      // Last, we actually need to save the comment to the database.
+      $comment->save();
 
-            foreach($data['reviews'] as $review) {
-
-                if( !in_array($review['author']['steamid'], $subject) ){
-
-                $values = [
- 
-                    // These values are for the entity that you're creating the comment for, not the comment itself.
-                    'entity_type' => 'node',            // required.
-                    'entity_id'   => $node->id(),                // required.
-                    'field_name'  => 'comment',         // required.
-                
-                    // The user id of the comment's 'author'. Use 0 for the anonymous user.
-                    'uid' => 0,                         // required.
-                
-                    // These values are for the comment itself.
-                    'comment_type' => 'comment',        // required.
-                    'subject' => strval($review['author']['steamid']),  // required.
-                    'comment_body' => $review['review'],      // optional.
-                
-                    // Whether the comment is 'approved' or not.
-                    'status' => 1,                      // optional. Defaults to 0.
-                    
-                ];
-                
-                // This will create an actual comment entity out of our field values.
-                $comment = Comment::create($values);
-                
-                // Last, we actually need to save the comment to the database.
-                $comment->save();
-
-                }
-                
-            } 
-            
-            // dpm(get_defined_vars());
-
-            \Drupal::messenger()->addMessage(t("ReviewAPI found " . count($data['reviews']) . " reviews for this game!"));
-
-        } else {
-
-            \Drupal::messenger()->addMessage(t('ReviewAPI found no reviews for this game...'));
-
-            return false;
-
-        }
-       
+      }
+      
     } 
+      
+    \Drupal::messenger()->addMessage(t("ReviewAPI found " . count($data['reviews']) . " reviews for this game!")); 
+
+  } 
+
+  // dpm(get_defined_vars());
 
 }
